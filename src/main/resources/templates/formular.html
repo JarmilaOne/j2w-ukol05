@@ -47,37 +47,18 @@
         <hr class="delitko">
 
         <h4 class="line__p">Sporty</h4>
-        <div class="line__p sporty">
-            <div>
-                <input type="checkbox" class="line__p" th:field="${form.sporty}" value="KITE"/>
-                <label class="line__p" th:for="${#ids.prev('sporty')}>Kiteboarding</label>
+        <div>
+            <div class="line__p">
+                <input type="checkbox" th:field="${form.sporty}" value="KITE">
+                <label th:for="${#ids.prev('sporty')}">Kiteboarding</label>
             </div>
-
-            <div>
-                <input  type="checkbox" class="line__p" th:field="${form.sporty}" value="SURF"/>
-                <label class="line__p" th:for="${#ids.prev('sporty')}>Kiteboarding</label>
+            <div class="line__p">
+                <input type="checkbox" th:field="${form.sporty}" value="SURF">
+                <label th:for="${#ids.prev('sporty')}">Surf</label>
             </div>
-
-            <div>
-                <input type="checkbox" class="line__p" th:field="${form.sporty}" value="SKATE"/>
-                <label class="line__p" th:for="${#ids.prev('sporty')}>Skateboarding</label>
-            </div>
-            <div class="error" th:if="${#fields.hasErrors('form.sporty')}" th:errors="${form.sporty}">
-            </div>
-
-            <br>
-
-             <div>
-                <input type="checkbox" class="line__p" th:checked="${form.sporty}" value="YOGA">
-                <label class="line__p">Yoga</label>
-            </div>
-            <div>
-                <input id="flyYoga" type="checkbox" class="line__p" name="fly" th:checked="${form.sporty}" value="FLY">
-                <label for="flyYoga" class="line__p">Fly Yoga</label>
-            </div>
-            <div>
-                <input id="water" type="checkbox" class="line__p" name="paddle" th:checked="${form.sporty}" value="PADDLE">
-                <label for="water" class="line__p">Paddle Yoga</label>
+            <div class="line__p">
+                <input type="checkbox" th:field="${form.sporty}" value="SKATE">
+                <label th:for="${#ids.prev('sporty')}">Skate</label>
             </div>
 
             <div class="error" th:if="${#fields.hasErrors('form.sporty')}" th:errors="${form.sporty}">
@@ -88,38 +69,60 @@
             <br>
             <hr class="delitko">
 
-            <label for="turnus" class="line__p">Turnus</label>
-            <select id="turnus" class="line__p" th:field="${form.turnus}">
-                <option value=""></option>
-                <option value="1">11. - 18. 7. 2021</option>
-                <option value="2">19. - 26. 7. 2021</option>
-                <option value="3">1.8. - 8. 8. 2021</option>
-                <option value="4">9. 8. - 16. 8. 2021</option>
-                <option value="5"> 17. 8. - 24. 8. 2021</option>
-            </select>
-            <div class="error" th:if="${#fields.hasErrors('form.turnus')}" th:errors="${form.turnus}"></div>
+        <div>
+             <div class="line__p">
+                <input type="checkbox" th:field="${form.sporty}" value="YOGA">
+                <label th:for="${#ids.prev('sporty')}">Yoga</label>
+            </div>
+            <div class="line__p">
+                <input type="checkbox" class="line__p" th:field="${form.sporty}" value="FLY">
+                <label th:for="${#ids.prev('sporty')}">Fly Yoga</label>
+            </div>
+            <div class="line__p">
+                <input type="checkbox" class="line__p" th:field="${form.sporty}" value="PADDLE">
+                <label th:for="${#ids.prev('sporty')}">Paddle Yoga</label>
+            </div>
+
+            <div class="error" th:if="${#fields.hasErrors('form.sporty')}" th:errors="${form.sporty}">
+            </div>
+
+        </div>
 
             <br>
             <hr class="delitko">
 
+        <label for="turnus" class="line__p">Turnus</label>
+        <select id="turnus" class="line__p" th:field="${form.turnus}">
+            <option value=""></option>
+            <option value="1">11. - 18. 7. 2021</option>
+            <option value="2">19. - 26. 7. 2021</option>
+            <option value="3">1.8. - 8. 8. 2021</option>
+            <option value="4">9. 8. - 16. 8. 2021</option>
+            <option value="5"> 17. 8. - 24. 8. 2021</option>
+        </select>
+        <div class="error" th:if="${#fields.hasErrors('form.turnus')}" th:errors="${form.turnus}"></div>
+
+            <br>
+            <hr class="delitko">
+        <div>
             <label for="email" class="line__p">E-mail rodiče</label>
             <input id="email" type="email" class="line__p" th:field="${form.email}">
             <div class="error" th:if="${#fields.hasErrors('form.email')}" th:errors="${form.email}"></div>
+        </div>
 
             <br>
-
+        <div>
             <label for="telefon" class="line__p">Telefon rodiče</label>
             <input id="telefon" type="tel" class="line__p" th:field="${form.phone}">
             <div class="error" th:if="${#fields.hasErrors('form.phone')}" th:errors="${form.phone}"></div>
-
-            <br>
+        </div>
 
             <br>
             <hr class="delitko">
 
-            <div class="button__align">
-                <button type="submit" class="button__one">Rezervovat tábor</button>
-            </div>
+        <div class="button__align">
+            <button type="submit" class="button__one">Rezervovat tábor</button>
+        </div>
 
     </form>
 </div>

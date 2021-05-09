@@ -14,24 +14,24 @@ import java.util.Random;
  * Kontroler obsluhující registraci účastníků dětského tábora.
  */
 @Controller
-@RequestMapping("/ldt")
+@RequestMapping("/")
 public class RegistraceController {
   private final Random random = new Random();
 
-  @GetMapping("")
+  @GetMapping("/")
   public ModelAndView index() {
-    ModelAndView maw = new ModelAndView("/ldt/formular");
+    ModelAndView maw = new ModelAndView("formular");
     maw.addObject("form", new RegistraceForm());
     return maw;
   }
 
-  @PostMapping("")
+  @PostMapping("/")
   public Object form(@ModelAttribute("form") RegistraceForm form, BindingResult bindingResult){
     if (bindingResult.hasErrors()){
-      return "/ldt/formular";
+      return "formular";
     }
 
-    return new ModelAndView("/ldt/rezervovano")
+    return new ModelAndView("rezervovano")
             .addObject("kod", Math.abs(random.nextInt()))
             .addObject("name", form.getName())
             .addObject("email", form.getEmail());
