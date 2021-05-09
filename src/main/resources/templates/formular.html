@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="tabor__box">
-    <form class="tabor">
+    <form class="tabor" th:action="@{/}" method="post">
         <h1>Přihlašovací formulář LDT</h1>
         <label for="jmeno" class="line__p">Jméno</label>
         <input id="jmeno" type="text" class="line__p" th:field="${form.name}">
@@ -35,10 +35,10 @@
 
         <h4 class="line__p">Pohlaví</h4>
         <div>
-            <input id="muz" type="radio" class="line__p" th:field="${form.pohlavi}" value="man">
+            <input id="muz" type="radio" class="line__p" th:field="${form.pohlavi}" value="MUZ">
             <label for="muz" class="line__p">Muž</label>
 
-            <input id="zena" type="radio" class="line__p" th:field="${form.pohlavi}" value="woman">
+            <input id="zena" type="radio" class="line__p" th:field="${form.pohlavi}" value="ZENA">
             <label for="zena" class="line__p">Žena</label>
         </div>
         <div class="error" th:if="${#fields.hasErrors('form.pohlavi')}" th:errors="${form.pohlavi}"></div>
