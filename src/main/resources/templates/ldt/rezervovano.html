@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezervováno</title>
+    <link rel="stylesheet" href="/style.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@100;200&family=Dancing+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="tabor__box">
+    <div>
+        <h1>Rezervace</h1>
+        <div>
+            Rezervace s číslem <strong th:text="${kod}">12346</strong>
+            pro <span th:text="${name}">Petr Novák</span> byla vytvořena.
+            <span th:unless="${#strings.isEmpty(email)}">Na e-mail <span th:text="${email}">zakaznik@example.com</span>
+                byla zaslána rekapitulace objednávky.</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
