@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Rezervováno</title>
-    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@100;200&family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
@@ -12,9 +12,19 @@
     <div class="tabor__box">
         <h1>Rezervace</h1>
         <div>
-            Rezervace s číslem <strong th:text="${kod}">12346</strong>
-            pro <span th:text="${name}">Petr Novák</span> byla vytvořena.
-            <span th:unless="${#strings.isEmpty(email)}">Na e-mail <span th:text="${email}">zakaznik@example.com</span>
+           Rezervace s číslem <strong th:text="${kod}">12346</strong>
+            pro <strong><span th:text="${name}">Petr</span> <span th:text="${surname}">Novák</span></strong> byla vytvořena.<br>
+
+            <h3 class="udaje">Vaše údaje</h3>
+            <p><strong>Pohlaví: </strong><span th:text="${sex}">Muž</span></p>
+            <p><strong>Vybrané sporty: </strong><span th:text="${sporty}">Box</span></p>
+            <p><strong>Turnus: </strong><span th:text="${turnus}">Petr</span></p>
+
+            <p th:unless="${#strings.isEmpty(email)}"><strong>E-mail na rodiče: </strong><span th:text="${email}"></span></p>
+            <p th:unless="${#strings.isEmpty(telefon)}"><strong>Telefon na rodiče: </strong><span th:text="${telefon}"></span></p>
+
+
+            <span th:unless="${#strings.isEmpty(email)}">Na e-mail <strong><span th:text="${email}">zakaznik@example.com</span></strong>
                 byla zaslána rekapitulace objednávky.</span>
         </div>
     </div>

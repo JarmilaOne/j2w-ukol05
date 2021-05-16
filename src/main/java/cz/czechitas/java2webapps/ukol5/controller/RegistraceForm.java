@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.EnumSet;
 
 public class RegistraceForm {
@@ -64,7 +65,7 @@ public class RegistraceForm {
         return birthdate;
     }
 
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
@@ -92,4 +93,14 @@ public class RegistraceForm {
     public void setPhone(Integer phone) {
         this.phone = phone;
     }
+
+    //Age
+    public int getAge() {
+        if (birthdate != null) {
+            Period period = birthdate.until(LocalDate.now());
+            return period.getYears();
+        }
+        return 0;
+    }
+
 }

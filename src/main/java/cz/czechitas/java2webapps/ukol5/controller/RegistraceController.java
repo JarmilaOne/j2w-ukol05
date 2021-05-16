@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Random;
 
 /**
@@ -16,25 +17,75 @@ import java.util.Random;
 @Controller
 @RequestMapping("/")
 public class RegistraceController {
-  private final Random random = new Random();
+    private final Random random = new Random();
 
-  @GetMapping("/")
-  public ModelAndView index() {
-    ModelAndView maw = new ModelAndView("formular");
-    maw.addObject("form", new RegistraceForm());
-    return maw;
-  }
-
-  @PostMapping("/")
-  public Object form(@ModelAttribute("form") RegistraceForm form, BindingResult bindingResult){
-    if (bindingResult.hasErrors()){
-      return "formular";
+    @GetMapping("/")
+    public ModelAndView index() {
+        ModelAndView maw = new ModelAndView("formular");
+        maw.addObject("form", new RegistraceForm());
+        return maw;
     }
 
-    return new ModelAndView("rezervovano")
-            .addObject("kod", Math.abs(random.nextInt()))
-            .addObject("name", form.getName())
-            .addObject("email", form.getEmail());
+    @PostMapping("/")
+    public Object form(@ModelAttribute("form") @Valid RegistraceForm form, BindingResult bindingResult) {
+        //Errors -> returns formular
+        if (bindingResult.hasErrors()) {
+            //Name and Surname check
+            if (form.getName() == null && form.getSurname() == null) {
+                bindingResult.rejectValue("name", "", "Zadejte, prosím, křestní jméno.");
+                bindingResult.rejectValue("surname", "", "Zadejte, prosím, příjmení");
+            } else if (form.getName() == null) {
+                bindingResult.rejectValue("name", "", "Zadejte, prosím, křestní jméno.");
+            } else if (form.getSurname() == null) {
+                bindingResult.rejectValue("surname", "", "Zadejte, prosím, příjmení");
+            }
+
+            //Check age
+            if (form.getAge() <= 9 || form.getAge() >= 15) {
+                bindingResult.rejectValue("birthdate", "", "Věk dítěte musí být mezi 9 - 15 lety včetně.");
+            }
+
+            //Check minimum 2 sports
+            if (form.getSporty().size() < 2) {
+                bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty.");
+            }
+            return "formular";
+
+        }
+
+        //Check age and sports
+        if (form.getAge() <= 9 || form.getAge() >= 15 && form.getSporty().size() < 2) {
+            bindingResult.rejectValue("birthdate", "", "Věk dítěte musí být mezi 9 - 15 lety včetně.");
+            bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty.");
+            return "formular";
+        }
+        //Check age
+        else if (form.getAge() <= 9 || form.getAge() >= 15) {
+            bindingResult.rejectValue("birthdate", "", "Věk dítěte musí být mezi 9 - 15 lety včetně.");
+            return "formular";
+        }
+        //Check minimum 2 sports
+        else if (form.getSporty().size() < 2) {
+            bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty.");
+            return "formular";
+        }
+
+        ModelAndView maw = new ModelAndView("rezervovano");
+                maw.addObject("kod", Math.abs(random.nextInt()))
+                .addObject("name", form.getName())
+                .addObject("surname", form.getSurname());
+                if (form.getPohlavi().equals("ZENA")){
+                    maw.addObject("sex", "žena");
+                }
+                else{
+                   maw.addObject("sex", "muž");
+                }
+
+                maw.addObject("sporty", form.getSporty())
+                .addObject("turnus", form.getTurnus())
+                .addObject("email", form.getEmail())
+                .addObject("telefon", form.getPhone());
+        return maw;
     }
-  }
+}
 
