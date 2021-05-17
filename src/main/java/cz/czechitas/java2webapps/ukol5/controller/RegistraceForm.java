@@ -4,10 +4,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.EnumSet;
+import java.util.Objects;
 
 public class RegistraceForm {
     @NotBlank
@@ -15,15 +17,17 @@ public class RegistraceForm {
     @NotBlank
     private String surname;
     @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthdate;
 
-    @NotNull
-    private EnumSet<Pohlavi> pohlavi;
-    @NotNull
-    private EnumSet<Sport> sporty;
+    @NotEmpty
+    private EnumSet<Pohlavi> pohlavi = EnumSet.noneOf(Pohlavi.class);
+    @NotEmpty
+    private EnumSet<Sport> sporty = EnumSet.noneOf(Sport.class);
 
     @NotBlank
     private String turnus;
+
     @Email
     private String email;
 
@@ -34,7 +38,7 @@ public class RegistraceForm {
     }
 
     public void setSporty(EnumSet<Sport> sporty) {
-        this.sporty = sporty;
+        this.sporty = Objects.requireNonNull(sporty);
     }
 
     public EnumSet<Pohlavi> getPohlavi() {
@@ -42,7 +46,7 @@ public class RegistraceForm {
     }
 
     public void setPohlavi(EnumSet<Pohlavi> pohlavi) {
-        this.pohlavi = pohlavi;
+        this.pohlavi = Objects.requireNonNull(pohlavi);
     }
 
     public String getName() {
@@ -65,7 +69,6 @@ public class RegistraceForm {
         return birthdate;
     }
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }

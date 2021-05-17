@@ -28,45 +28,30 @@ public class RegistraceController {
 
     @PostMapping("/")
     public Object form(@ModelAttribute("form") @Valid RegistraceForm form, BindingResult bindingResult) {
-        //Errors -> returns formular
-        if (bindingResult.hasErrors()) {
-            //Name and Surname check
-            if (form.getName() == null && form.getSurname() == null) {
-                bindingResult.rejectValue("name", "", "Zadejte, prosím, křestní jméno.");
-                bindingResult.rejectValue("surname", "", "Zadejte, prosím, příjmení");
-            } else if (form.getName() == null) {
-                bindingResult.rejectValue("name", "", "Zadejte, prosím, křestní jméno.");
-            } else if (form.getSurname() == null) {
-                bindingResult.rejectValue("surname", "", "Zadejte, prosím, příjmení");
-            }
 
-            //Check age
-            if (form.getAge() <= 9 || form.getAge() >= 15) {
-                bindingResult.rejectValue("birthdate", "", "Věk dítěte musí být mezi 9 - 15 lety včetně.");
-            }
-
-            //Check minimum 2 sports
-            if (form.getSporty().size() < 2) {
-                bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty.");
-            }
-            return "formular";
-
-        }
-
-        //Check age and sports
-        if (form.getAge() <= 9 || form.getAge() >= 15 && form.getSporty().size() < 2) {
-            bindingResult.rejectValue("birthdate", "", "Věk dítěte musí být mezi 9 - 15 lety včetně.");
-            bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty.");
-            return "formular";
-        }
         //Check age
-        else if (form.getAge() <= 9 || form.getAge() >= 15) {
+       if (form.getAge() <= 9 || form.getAge() >= 15) {
             bindingResult.rejectValue("birthdate", "", "Věk dítěte musí být mezi 9 - 15 lety včetně.");
-            return "formular";
         }
         //Check minimum 2 sports
-        else if (form.getSporty().size() < 2) {
+        if (form.getSporty().size() < 2) {
             bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty.");
+        }
+        //Check sex
+        if (form.getPohlavi().size() < 1) {
+            bindingResult.rejectValue("pohlavi", "", "Vyberte, prosím, pohlaví.");
+        }
+
+        //Errors -> returns formular
+        if (bindingResult.hasErrors()) {
+            //Name check
+            if (form.getName().equals(null)) {
+                bindingResult.rejectValue("name", "", "Zadejte, prosím, křestní jméno.");
+            }
+            //Surname check
+            if (form.getSurname().equals(null)) {
+                bindingResult.rejectValue("surname", "", "Zadejte, prosím, příjmení");
+            }
             return "formular";
         }
 
