@@ -45,7 +45,8 @@ public class RegistraceController {
         //Errors -> returns formular
         if (bindingResult.hasErrors()) {
             //Name check
-            if (form.getName().equals("")) {
+            if (form.getName().isBlank() == true) {
+                //form.getName().equals("")
                 bindingResult.rejectValue("name", "", "Zadejte, prosím, křestní jméno!");
             }
             //Surname check
@@ -55,7 +56,6 @@ public class RegistraceController {
             //Turnus check
             if (form.getTurnus().equals("")){
                 bindingResult.rejectValue("turnus", "", "Vyberte, prosím, turnus!");
-
             }
             return "formular";
         }

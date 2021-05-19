@@ -12,23 +12,23 @@ import java.util.EnumSet;
 import java.util.Objects;
 
 public class RegistraceForm {
-    @NotBlank
+    @NotBlank (message = "")
     private String name;
-    @NotBlank
+    @NotBlank (message = "")
     private String surname;
-    @NotNull
+    @NotNull (message = "")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthdate;
 
-    @NotEmpty
+    @NotEmpty (message = "")
     private EnumSet<Pohlavi> pohlavi = EnumSet.noneOf(Pohlavi.class);
-    @NotEmpty
+    @NotEmpty (message = "")
     private EnumSet<Sport> sporty = EnumSet.noneOf(Sport.class);
 
-    @NotBlank
+    @NotBlank (message = "")
     private String turnus;
 
-    @Email
+    @Email (message = "")
     private String email;
 
     private Integer phone;
