@@ -35,22 +35,27 @@ public class RegistraceController {
         }
         //Check minimum 2 sports
         if (form.getSporty().size() < 2) {
-            bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty.");
+            bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty!");
         }
         //Check sex
         if (form.getPohlavi().size() < 1) {
-            bindingResult.rejectValue("pohlavi", "", "Vyberte, prosím, pohlaví.");
+            bindingResult.rejectValue("pohlavi", "", "Vyberte, prosím, pohlaví!");
         }
 
         //Errors -> returns formular
         if (bindingResult.hasErrors()) {
             //Name check
-            if (form.getName().equals(null)) {
-                bindingResult.rejectValue("name", "", "Zadejte, prosím, křestní jméno.");
+            if (form.getName().equals("")) {
+                bindingResult.rejectValue("name", "", "Zadejte, prosím, křestní jméno!");
             }
             //Surname check
-            if (form.getSurname().equals(null)) {
-                bindingResult.rejectValue("surname", "", "Zadejte, prosím, příjmení");
+            if (form.getSurname().equals("")) {
+                bindingResult.rejectValue("surname", "", "Zadejte, prosím, příjmení!");
+            }
+            //Turnus check
+            if (form.getTurnus().equals("")){
+                bindingResult.rejectValue("turnus", "", "Vyberte, prosím, turnus!");
+
             }
             return "formular";
         }
