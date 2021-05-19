@@ -34,13 +34,15 @@ public class RegistraceController {
             bindingResult.rejectValue("birthdate", "", "Věk dítěte musí být mezi 9 - 15 lety včetně.");
         }
         //Check minimum 2 sports
-        if (form.getSporty().size() < 2) {
+        if (form.getSporty() == null || form.getSporty().size() < 2) {
             bindingResult.rejectValue("sporty", "", "Vyberte, prosím, alespoň dva sporty!");
         }
+
         //Check sex
-        if (form.getPohlavi().size() < 1) {
+        if (form.getPohlavi() == null) {
             bindingResult.rejectValue("pohlavi", "", "Vyberte, prosím, pohlaví!");
         }
+
 
         //Errors -> returns formular
         if (bindingResult.hasErrors()) {

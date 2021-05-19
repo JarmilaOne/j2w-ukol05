@@ -20,8 +20,8 @@ public class RegistraceForm {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthdate;
 
-    @NotEmpty (message = "")
-    private EnumSet<Pohlavi> pohlavi = EnumSet.noneOf(Pohlavi.class);
+    @NotNull (message = "")
+    private Pohlavi pohlavi;
     @NotEmpty (message = "")
     private EnumSet<Sport> sporty = EnumSet.noneOf(Sport.class);
 
@@ -38,15 +38,15 @@ public class RegistraceForm {
     }
 
     public void setSporty(EnumSet<Sport> sporty) {
-        this.sporty = Objects.requireNonNull(sporty);
+        this.sporty = sporty;
     }
 
-    public EnumSet<Pohlavi> getPohlavi() {
+    public Pohlavi getPohlavi() {
         return pohlavi;
     }
 
-    public void setPohlavi(EnumSet<Pohlavi> pohlavi) {
-        this.pohlavi = Objects.requireNonNull(pohlavi);
+    public void setPohlavi(Pohlavi pohlavi) {
+        this.pohlavi = pohlavi;
     }
 
     public String getName() {
